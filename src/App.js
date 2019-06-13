@@ -65,12 +65,23 @@ class App extends Component {
     const name1 = persons[1].name;
     const age1 = persons[1].age;
 
+    const style = {
+      backgroundColor: 'white',
+      font: 'inherit',
+      border: '1px solid blue',
+      padding: '8px',
+      cursor: 'pointer'
+    };
+
     /* In normal JS it is onClick is onclick */
     return (
       <div className='App'>
         <h1>Hi, I am React App</h1>
         {/* Approach 1: Using Bind */} 
-        <button onClick={this.switchNameHandler.bind(this, "KAMRAN")} type="button">Change State</button>  
+        {/* "style" attribute is made available by JSX */}
+        <button 
+        style = {style}
+        onClick={this.switchNameHandler.bind(this, "KAMRAN")} type="button">Change State</button>  
         
         <Person name={name} age={age}> My Hobbies: Blogging </Person>
 
