@@ -52,13 +52,19 @@ class App extends Component {
   render() {
     const {persons} = this.state;
     const {name, age} = persons[0];
+    const name1 = persons[1].name;
+    const age1 = persons[1].age;
 
     /* In normal JS it is onClick is onclick */
     return (
       <div className='App'>
         <h1>Hi, I am React App</h1>
         <button onClick={this.switchNameHandler} type="button">Change State</button>  
+        
         <Person name={name} age={age}> My Hobbies: Blogging </Person>
+
+        <Person name={name1} age={age1} click={this.switchNameHandler}> My Hobbies: Reading </Person>
+
       </div>
     );
   }
