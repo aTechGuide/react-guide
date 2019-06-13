@@ -6,7 +6,8 @@ import './App.css'
 function App() {
   return (
     <div className='App'>
-      <Person />
+      <h1>Hi, I am React App</h1>
+      <Person name="Kamran" age="29"> My Hobbies: Blogging </Person>
     </div>
   );
 }
