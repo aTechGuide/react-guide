@@ -49,6 +49,16 @@ class App extends Component {
     })
   }
 
+  nameChangedHandler = (event) => {
+    this.setState({
+      persons: [
+        {name: 'Kamran', age: 29.5},
+        {name: event.target.value, age: 29},
+        {name: 'Stephanie', age: 26}
+      ]
+    })
+  }
+
   render() {
     const {persons} = this.state;
     const {name, age} = persons[0];
@@ -65,7 +75,7 @@ class App extends Component {
         <Person name={name} age={age}> My Hobbies: Blogging </Person>
 
         {/* Approach 2: Using Anonymous Arrow Function; This method is INEFFICIENT */} 
-        <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")}> My Hobbies: Reading </Person>
+        <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")} changed={this.nameChangedHandler}> My Hobbies: Reading </Person>
 
       </div>
     );
