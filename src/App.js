@@ -30,7 +30,8 @@ class App extends Component {
       {name: 'Kamran', age: 29},
       {name: 'Manu', age: 29},
       {name: 'Stephanie', age: 27}
-    ]
+    ],
+    showPersons: false
   }
 
   switchNameHandler = (newName) => {
@@ -59,8 +60,13 @@ class App extends Component {
     })
   }
 
+  togglePersonsHandler = () => {
+    const {showPersons} = this.state;
+    this.setState({showPersons: !showPersons});
+  }
+
   render() {
-    const {persons} = this.state;
+    const {persons, showPersons} = this.state;
     const {name, age} = persons[0];
     const name1 = persons[1].name;
     const age1 = persons[1].age;
@@ -73,6 +79,18 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let displayPersons = null;
+
+    if (showPersons) {
+      displayPersons = (
+        <div>
+          <Person name={name} age={age}> My Hobbies: Blogging </Person>
+          {/* Approach 2: Using Anonymous Arrow Function; This method is INEFFICIENT */} 
+          <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")}changed={this.nameChangedHandler}> My Hobbies: Reading </Person>
+        </div>
+      )
+    }
+
     /* In normal JS it is onClick is onclick */
     return (
       <div className='App'>
@@ -80,14 +98,10 @@ class App extends Component {
         {/* Approach 1: Using Bind */} 
         {/* "style" attribute is made available by JSX */}
         <button 
-        style = {style}
-        onClick={this.switchNameHandler.bind(this, "KAMRAN")} type="button">Change State</button>  
-        
-        <Person name={name} age={age}> My Hobbies: Blogging </Person>
-
-        {/* Approach 2: Using Anonymous Arrow Function; This method is INEFFICIENT */} 
-        <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")} changed={this.nameChangedHandler}> My Hobbies: Reading </Person>
-
+          style = {style}
+          onClick={this.togglePersonsHandler} type="button">Toggle Persons
+        </button>  
+        {displayPersons}
       </div>
     );
   }
