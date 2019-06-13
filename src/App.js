@@ -22,6 +22,8 @@ import './App.css'
 */
 class App extends Component {
 
+  /* App is a Stateful / Smart / Container component as it has an internal state */
+
   /* state is a reserved word */
   state = {
     persons: [
@@ -37,6 +39,7 @@ class App extends Component {
     // const {persons} = this.state;
     // persons[0].name = "KAMRAN";
 
+    // "persons" is merged to old "persons" object UNLINE in React Hook where it replaces the old object with new one
     this.setState({
       persons: [
         {name: 'KAMRAN', age: 29.5},
