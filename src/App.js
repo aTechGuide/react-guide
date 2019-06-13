@@ -33,7 +33,7 @@ class App extends Component {
     ]
   }
 
-  switchNameHandler = () => {
+  switchNameHandler = (newName) => {
 
     // DONT DO THE FOLLOWING, As React will not recognise this
     // const {persons} = this.state;
@@ -42,7 +42,7 @@ class App extends Component {
     // "persons" is merged to old "persons" object UNLINE in React Hook where it replaces the old object with new one
     this.setState({
       persons: [
-        {name: 'KAMRAN', age: 29.5},
+        {name: newName, age: 29.5},
         {name: 'Manu', age: 29},
         {name: 'Stephanie', age: 26}
       ]
@@ -59,11 +59,13 @@ class App extends Component {
     return (
       <div className='App'>
         <h1>Hi, I am React App</h1>
-        <button onClick={this.switchNameHandler} type="button">Change State</button>  
+        {/* Approach 1: Using Bind */} 
+        <button onClick={this.switchNameHandler.bind(this, "KAMRAN")} type="button">Change State</button>  
         
         <Person name={name} age={age}> My Hobbies: Blogging </Person>
 
-        <Person name={name1} age={age1} click={this.switchNameHandler}> My Hobbies: Reading </Person>
+        {/* Approach 2: Using Anonymous Arrow Function; This method is INEFFICIENT */} 
+        <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")}> My Hobbies: Reading </Person>
 
       </div>
     );
