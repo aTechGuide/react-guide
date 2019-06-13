@@ -27,37 +27,38 @@ class App extends Component {
   /* state is a reserved word */
   state = {
     persons: [
-      {name: 'Kamran', age: 29},
-      {name: 'Manu', age: 29},
-      {name: 'Stephanie', age: 27}
+      {id: '1', name: 'Kamran', age: 29},
+      {id: '2', name: 'Manu', age: 29},
+      {id: '3', name: 'Stephanie', age: 27}
     ],
     showPersons: false
   }
 
-  switchNameHandler = (newName) => {
+  nameChangedHandler = (event, id) => {
 
-    // DONT DO THE FOLLOWING, As React will not recognise this
-    // const {persons} = this.state;
-    // persons[0].name = "KAMRAN";
+    const {persons} = this.state;
+    const personIndex = persons.findIndex(p => {
+      return p.id === id;
+    });
 
-    // "persons" is merged to old "persons" object UNLINE in React Hook where it replaces the old object with new one
+    const personCopy = {...persons[personIndex]};
+
+    personCopy.name = event.target.value;
+    const personsCopy = [...persons];
+    personsCopy[personIndex] = personCopy;
+
     this.setState({
-      persons: [
-        {name: newName, age: 29.5},
-        {name: 'Manu', age: 29},
-        {name: 'Stephanie', age: 26}
-      ]
+      persons: personsCopy
     })
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        {name: 'Kamran', age: 29.5},
-        {name: event.target.value, age: 29},
-        {name: 'Stephanie', age: 26}
-      ]
-    })
+  deletePersonHandler = (personIndex) => {
+    const {persons} = this.state;
+
+    /* As a Good Practice copy the array first before modifying */
+    const personsCopy = [...persons];
+    personsCopy.splice(personIndex, 1)
+    this.setState({persons: personsCopy})
   }
 
   togglePersonsHandler = () => {
@@ -67,9 +68,6 @@ class App extends Component {
 
   render() {
     const {persons, showPersons} = this.state;
-    const {name, age} = persons[0];
-    const name1 = persons[1].name;
-    const age1 = persons[1].age;
 
     const style = {
       backgroundColor: 'white',
@@ -84,9 +82,16 @@ class App extends Component {
     if (showPersons) {
       displayPersons = (
         <div>
-          <Person name={name} age={age}> My Hobbies: Blogging </Person>
-          {/* Approach 2: Using Anonymous Arrow Function; This method is INEFFICIENT */} 
-          <Person name={name1} age={age1} click={ () => this.switchNameHandler("KAM!")}changed={this.nameChangedHandler}> My Hobbies: Reading </Person>
+          {
+            persons.map((person, index) => {
+              return <Person 
+                name={person.name} 
+                age={person.age} 
+                click={ () => this.deletePersonHandler(index)} 
+                key={person.id} 
+                changed={ (event) => this.nameChangedHandler(event, person.id)} /> 
+            })
+          }
         </div>
       )
     }
