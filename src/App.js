@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person'
 import './App.css'
 
@@ -76,11 +75,7 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer',
-      ':hover': {
-        backgroundColor: 'lightgreen',
-        color: 'black'
-      }
+      cursor: 'pointer'
     };
 
     let displayPersons = null;
@@ -102,10 +97,6 @@ class App extends Component {
       );
 
       style.backgroundColor = 'red';
-      style[':hover'] = {
-        backgroundColor: 'salmon',
-        color: 'black'
-      }
     }
 
     const classes = [];
@@ -119,22 +110,20 @@ class App extends Component {
 
     /* In normal JS "onClick" is onclick */
     return (
-      <StyleRoot>
-        <div className='App'>
-          <h1>Hi, I am React App</h1>
-          <p className={classes.join(' ')}>This is really working!</p>
-          {/* "style" attribute is made available by JSX */}
-          <button 
-            style = {style}
-            onClick={this.togglePersonsHandler} type="button">
-              Toggle Persons
-          </button>  
-          {displayPersons}
-        </div>
-      </StyleRoot>
+      <div className='App'>
+        <h1>Hi, I am React App</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
+        {/* "style" attribute is made available by JSX */}
+        <button 
+          style = {style}
+          onClick={this.togglePersonsHandler} type="button">
+            Toggle Persons
+        </button>  
+        {displayPersons}
+      </div>
     );
   }
   
 }
 
-export default Radium(App);
+export default App;
