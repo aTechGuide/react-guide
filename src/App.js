@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Person from './Person/Person'
-import ModuleClasses from './App.module.css'
+import classes from './App.module.css'
 
 /*
   PROPS
@@ -69,16 +69,8 @@ class App extends Component {
   render() {
     const {persons, showPersons} = this.state;
 
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let displayPersons = null;
+    let btnClass = '';
 
     if (showPersons) {
       displayPersons = (
@@ -96,26 +88,26 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = 'red';
+      btnClass = classes.Reddish;
     }
 
     const assignedClasses = [];
     if (persons.length <= 2) {
-      assignedClasses.push(ModuleClasses.red);
+      assignedClasses.push(classes.red);
     }
 
     if (persons.length <= 1) {
-      assignedClasses.push(ModuleClasses.bold);
+      assignedClasses.push(classes.bold);
     }
 
     /* In normal JS "onClick" is onclick */
     return (
-      <div className={ModuleClasses.App}>
+      <div className={classes.App}>
         <h1>Hi, I am React App</h1>
         <p className={assignedClasses.join(' ')}>This is really working!</p>
         {/* "style" attribute is made available by JSX */}
         <button 
-          style = {style}
+          className={btnClass}
           onClick={this.togglePersonsHandler} type="button">
             Toggle Persons
         </button>  
