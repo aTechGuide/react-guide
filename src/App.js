@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Radium from 'radium';
+import Radium, {StyleRoot} from 'radium';
 import Person from './Person/Person'
 import './App.css'
 
@@ -119,17 +119,19 @@ class App extends Component {
 
     /* In normal JS "onClick" is onclick */
     return (
-      <div className='App'>
-        <h1>Hi, I am React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
-        {/* "style" attribute is made available by JSX */}
-        <button 
-          style = {style}
-          onClick={this.togglePersonsHandler} type="button">
-            Toggle Persons
-        </button>  
-        {displayPersons}
-      </div>
+      <StyleRoot>
+        <div className='App'>
+          <h1>Hi, I am React App</h1>
+          <p className={classes.join(' ')}>This is really working!</p>
+          {/* "style" attribute is made available by JSX */}
+          <button 
+            style = {style}
+            onClick={this.togglePersonsHandler} type="button">
+              Toggle Persons
+          </button>  
+          {displayPersons}
+        </div>
+      </StyleRoot>
     );
   }
   
