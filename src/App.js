@@ -99,10 +99,20 @@ class App extends Component {
       style.backgroundColor = 'red';
     }
 
+    const classes = [];
+    if (persons.length <= 2) {
+      classes.push('red');
+    }
+
+    if (persons.length <= 1) {
+      classes.push('bold');
+    }
+
     /* In normal JS "onClick" is onclick */
     return (
       <div className='App'>
         <h1>Hi, I am React App</h1>
+        <p className={classes.join(' ')}>This is really working!</p>
         {/* "style" attribute is made available by JSX */}
         <button 
           style = {style}
