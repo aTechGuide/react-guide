@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import Person from './Person/Person'
-import './App.css'
+import ModuleClasses from './App.module.css'
 
 /*
   PROPS
@@ -99,20 +99,20 @@ class App extends Component {
       style.backgroundColor = 'red';
     }
 
-    const classes = [];
+    const assignedClasses = [];
     if (persons.length <= 2) {
-      classes.push('red');
+      assignedClasses.push(ModuleClasses.red);
     }
 
     if (persons.length <= 1) {
-      classes.push('bold');
+      assignedClasses.push(ModuleClasses.bold);
     }
 
     /* In normal JS "onClick" is onclick */
     return (
-      <div className='App'>
+      <div className={ModuleClasses.App}>
         <h1>Hi, I am React App</h1>
-        <p className={classes.join(' ')}>This is really working!</p>
+        <p className={assignedClasses.join(' ')}>This is really working!</p>
         {/* "style" attribute is made available by JSX */}
         <button 
           style = {style}
