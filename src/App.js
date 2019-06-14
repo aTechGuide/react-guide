@@ -70,7 +70,8 @@ class App extends Component {
     const {persons, showPersons} = this.state;
 
     const style = {
-      backgroundColor: 'white',
+      backgroundColor: 'green',
+      color: 'white',
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
@@ -93,18 +94,20 @@ class App extends Component {
             })
           }
         </div>
-      )
+      );
+
+      style.backgroundColor = 'red';
     }
 
-    /* In normal JS it is onClick is onclick */
+    /* In normal JS "onClick" is onclick */
     return (
       <div className='App'>
         <h1>Hi, I am React App</h1>
-        {/* Approach 1: Using Bind */} 
         {/* "style" attribute is made available by JSX */}
         <button 
           style = {style}
-          onClick={this.togglePersonsHandler} type="button">Toggle Persons
+          onClick={this.togglePersonsHandler} type="button">
+            Toggle Persons
         </button>  
         {displayPersons}
       </div>
