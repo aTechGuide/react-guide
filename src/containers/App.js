@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
-import Person from './Person/Person'
+import Persons from '../components/Persons/Persons'
 import classes from './App.module.css'
-import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
+import Cockpit from '../components/cockpit/Cockpit'
 
 /*
   PROPS
@@ -71,49 +71,21 @@ class App extends Component {
     const {persons, showPersons} = this.state;
 
     let displayPersons = null;
-    let btnClass = '';
 
     if (showPersons) {
-      displayPersons = (
-        <div>
-          {
-            persons.map((person, index) => {
-              /* Key has to be on the outer element */
-              return <ErrorBoundary key={person.id} >
-                <Person 
-                  name={person.name} 
-                  age={person.age} 
-                  click={ () => this.deletePersonHandler(index)} 
-                  changed={ (event) => this.nameChangedHandler(event, person.id)} /> 
-                </ErrorBoundary>
-            })
-          }
-        </div>
-      );
-
-      btnClass = classes.Reddish;
+      displayPersons = <Persons 
+          persons={persons}
+          clicked={this.deletePersonHandler} 
+          changed={this.nameChangedHandler} />;
     }
 
-    const assignedClasses = [];
-    if (persons.length <= 2) {
-      assignedClasses.push(classes.red);
-    }
-
-    if (persons.length <= 1) {
-      assignedClasses.push(classes.bold);
-    }
-
-    /* In normal JS "onClick" is onclick */
     return (
       <div className={classes.App}>
-        <h1>Hi, I am React App</h1>
-        <p className={assignedClasses.join(' ')}>This is really working!</p>
-        {/* "style" attribute is made available by JSX */}
-        <button 
-          className={btnClass}
-          onClick={this.togglePersonsHandler} type="button">
-            Toggle Persons
-        </button>  
+        
+        <Cockpit showPersons={showPersons}
+        persons={persons}
+        clicked={this.togglePersonsHandler}  />
+        
         {displayPersons}
       </div>
     );
