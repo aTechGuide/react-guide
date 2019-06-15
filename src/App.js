@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Person from './Person/Person'
 import classes from './App.module.css'
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary'
 
 /*
   PROPS
@@ -77,12 +78,14 @@ class App extends Component {
         <div>
           {
             persons.map((person, index) => {
-              return <Person 
-                name={person.name} 
-                age={person.age} 
-                click={ () => this.deletePersonHandler(index)} 
-                key={person.id} 
-                changed={ (event) => this.nameChangedHandler(event, person.id)} /> 
+              /* Key has to be on the outer element */
+              return <ErrorBoundary key={person.id} >
+                <Person 
+                  name={person.name} 
+                  age={person.age} 
+                  click={ () => this.deletePersonHandler(index)} 
+                  changed={ (event) => this.nameChangedHandler(event, person.id)} /> 
+                </ErrorBoundary>
             })
           }
         </div>
