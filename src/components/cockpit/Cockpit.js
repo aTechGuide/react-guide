@@ -3,7 +3,7 @@ import classes from './Cockpit.module.css'
 
 const cockpit = (props) => {
 
-  const {persons, showPersons, clicked} = props;
+  const {persons, showPersons, clicked, title} = props;
 
   const assignedClasses = [];
   let btnClass = '';
@@ -22,7 +22,7 @@ const cockpit = (props) => {
 
     return (
       <div className={classes.Cockpit}>
-      <h1>Hi, I am React App</h1>
+      <h1>{title}</h1>
           <p className={assignedClasses.join(' ')}>This is really working!</p>
           {/* "style" attribute is made available by JSX */}
           <button 

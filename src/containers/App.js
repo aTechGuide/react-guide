@@ -26,14 +26,30 @@ class App extends Component {
   /* App is a Stateful / Smart / Container component as it has an internal state */
 
   /* state is a reserved word */
-  state = {
-    persons: [
-      {id: '1', name: 'Kamran', age: 29},
-      {id: '2', name: 'Manu', age: 29},
-      {id: '3', name: 'Stephanie', age: 27}
-    ],
-    showPersons: false
+
+  constructor(props) {
+    super(props);
+    console.log('[App.js] constructor');
+
+    this.state = {
+      persons: [
+        {id: '1', name: 'Kamran', age: 29},
+        {id: '2', name: 'Manu', age: 29},
+        {id: '3', name: 'Stephanie', age: 27}
+      ],
+      showPersons: false
+    }
   }
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[app.js] getDerivedStateFromProps', props);
+    return state;
+  }
+
+  componentDidMount() {
+    console.log('[App.js] componentDidMount');
+  }
+
 
   nameChangedHandler = (event, id) => {
 
@@ -68,7 +84,9 @@ class App extends Component {
   }
 
   render() {
+    console.log('[App.js] RENDER');
     const {persons, showPersons} = this.state;
+    const {appTitle} = this.props;
 
     let displayPersons = null;
 
@@ -82,7 +100,9 @@ class App extends Component {
     return (
       <div className={classes.App}>
         
-        <Cockpit showPersons={showPersons}
+        <Cockpit 
+        title={appTitle}
+        showPersons={showPersons}
         persons={persons}
         clicked={this.togglePersonsHandler}  />
         
