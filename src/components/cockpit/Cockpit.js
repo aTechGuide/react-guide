@@ -3,7 +3,9 @@ import classes from './Cockpit.module.css'
 
 const cockpit = (props) => {
 
-  const {persons, showPersons, clicked, title} = props;
+  console.log('[cockpit.js] is rendered'); 
+
+  const {personsLength, showPersons, clicked, title} = props;
 
   const assignedClasses = [];
   let btnClass = '';
@@ -12,11 +14,11 @@ const cockpit = (props) => {
     btnClass = classes.Red;
   }
 
-  if (persons.length <= 2) {
+  if (personsLength <= 2) {
     assignedClasses.push(classes.red);
   }
 
-  if (persons.length <= 1) {
+  if (personsLength <= 1) {
     assignedClasses.push(classes.bold);
   }
 
@@ -34,4 +36,4 @@ const cockpit = (props) => {
   );
 };
 
-export default cockpit;
+export default React.memo(cockpit);
