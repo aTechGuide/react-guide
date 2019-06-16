@@ -1,7 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 import Persons from '../components/Persons/Persons'
 import classes from './App.module.css'
 import Cockpit from '../components/cockpit/Cockpit'
+import withClass from '../components/hof/withClass'
 
 /*
   PROPS
@@ -87,8 +88,7 @@ class App extends Component {
     }
 
     return (
-      <div className={classes.App}>
-        
+      <Fragment>
         <Cockpit 
         title={appTitle}
         showPersons={showPersons}
@@ -96,10 +96,10 @@ class App extends Component {
         clicked={this.togglePersonsHandler}  />
         
         {displayPersons}
-      </div>
+      </Fragment>
     );
   }
   
 }
 
-export default App;
+export default withClass(App, classes.App);
