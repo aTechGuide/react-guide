@@ -1,9 +1,17 @@
-import React from 'react';
+import React, {useEffect, useRef} from 'react';
 import classes from './Cockpit.module.css'
 
-const cockpit = (props) => {
+const Cockpit = (props) => {
 
   console.log('[cockpit.js] is rendered'); 
+
+  const toggleButtonRef = useRef(null);
+
+  useEffect(() => {
+    console.log('[cockpit.js] useEffect is called'); 
+    toggleButtonRef.current.click();
+  }, []); 
+  
 
   const {personsLength, showPersons, clicked, title} = props;
 
@@ -28,6 +36,7 @@ const cockpit = (props) => {
           <p className={assignedClasses.join(' ')}>This is really working!</p>
           {/* "style" attribute is made available by JSX */}
           <button 
+            ref = {toggleButtonRef}
             className={btnClass}
             onClick={clicked} type="button">
               Toggle Persons
@@ -36,4 +45,4 @@ const cockpit = (props) => {
   );
 };
 
-export default React.memo(cockpit);
+export default React.memo(Cockpit);

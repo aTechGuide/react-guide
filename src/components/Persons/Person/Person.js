@@ -1,25 +1,43 @@
-import React from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import classes from './Person.module.css';
 
 /* person is a stateless / Dumb / Presentational component as it has NO internal state management */
-const person = (props) => {
-  const {name, age, children, click, changed} = props;
+
+class Person extends Component {
+
+  constructor(props) {
+    super(props);
+    this.inputElementRef = React.createRef(); // React.createRef() = Any Ref Object React gives us
+  }
+
+  componentDidMount() {
+    // this.inputElement.focus();
+    this.inputElementRef.current.focus();
+  }
+
+  render() {
+    const {name, age, children, click, changed} = this.props;
 
   return (
     <div className={classes.Person}>
       <p onClick={click} > I am {name} and I am {age} years old </p>
       <p> {children} </p>
-      <input onChange={changed} defaultValue={name} />
+      <input 
+      // ref={(inputEl) => {this.inputElement = inputEl}} // Option 1
+      ref = {this.inputElementRef} // Option 2
+      type="text" onChange={changed} defaultValue={name} />
     </div>
   )
+  }
 }
 
-person.propTypes = {
+
+Person.propTypes = {
   click: PropTypes.func.isRequired,
   name: PropTypes.string.isRequired,
   age: PropTypes.number.isRequired,
   changed: PropTypes.func.isRequired
 };
 
-export default person;
+export default Person;
