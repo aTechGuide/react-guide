@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import classes from './Person.module.css';
 
 /* person is a stateless / Dumb / Presentational component as it has NO internal state management */
@@ -13,5 +14,12 @@ const person = (props) => {
     </div>
   )
 }
+
+person.propTypes = {
+  click: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  age: PropTypes.number.isRequired,
+  changed: PropTypes.func.isRequired
+};
 
 export default person;
