@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types'
 import classes from './Person.module.css';
+import AuthContext from '../../context/auth-context'
 
 /* person is a stateless / Dumb / Presentational component as it has NO internal state management */
 
@@ -21,6 +22,10 @@ class Person extends Component {
 
   return (
     <div className={classes.Person}>
+      <AuthContext.Consumer>
+        {(context) => context.authenticated ? <p>Authenticated</p> :  <p>Please log In</p>}
+      </AuthContext.Consumer>
+      
       <p onClick={click} > I am {name} and I am {age} years old </p>
       <p> {children} </p>
       <input 

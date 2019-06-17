@@ -1,5 +1,6 @@
 import React, {useEffect, useRef} from 'react';
 import classes from './Cockpit.module.css'
+import AuthContext from '../context/auth-context'
 
 const Cockpit = (props) => {
 
@@ -19,7 +20,7 @@ const Cockpit = (props) => {
   let btnClass = '';
 
   if(showPersons) {
-    btnClass = classes.Red;
+    btnClass = classes.Reddish;
   }
 
   if (personsLength <= 2) {
@@ -40,7 +41,11 @@ const Cockpit = (props) => {
             className={btnClass}
             onClick={clicked} type="button">
               Toggle Persons
-          </button>  
+          </button> 
+          <AuthContext.Consumer>
+            {(context) => <button onClick={context.login} type="button"> Log In</button> }
+          </AuthContext.Consumer> 
+          
     </div>
   );
 };

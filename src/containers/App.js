@@ -3,6 +3,7 @@ import Persons from '../components/Persons/Persons'
 import classes from './App.module.css'
 import Cockpit from '../components/cockpit/Cockpit'
 import withClass from '../components/hof/withClass'
+import AuthContext from '../components/context/auth-context'
 
 /*
   PROPS
@@ -38,7 +39,8 @@ class App extends Component {
         {id: '2', name: 'Manu', age: 29},
         {id: '3', name: 'Stephanie', age: 27}
       ],
-      showPersons: false
+      showPersons: false,
+      authenticated: false
     }
   }
 
@@ -74,8 +76,12 @@ class App extends Component {
     this.setState({showPersons: !showPersons});
   }
 
+  loginHandler = () => {
+    this.setState({authenticated: true});
+  }
+
   render() {
-    const {persons, showPersons} = this.state;
+    const {persons, showPersons, authenticated} = this.state;
     const {appTitle} = this.props;
 
     let displayPersons = null;
@@ -89,13 +95,16 @@ class App extends Component {
 
     return (
       <Fragment>
-        <Cockpit 
-        title={appTitle}
-        showPersons={showPersons}
-        personsLength={persons.length}
-        clicked={this.togglePersonsHandler}  />
-        
-        {displayPersons}
+        <AuthContext.Provider value={{
+            authenticated, login: this.loginHandler}} >
+          <Cockpit 
+          title={appTitle}
+          showPersons={showPersons}
+          personsLength={persons.length}
+          clicked={this.togglePersonsHandler}/>
+          
+          {displayPersons}
+        </AuthContext.Provider>
       </Fragment>
     );
   }
